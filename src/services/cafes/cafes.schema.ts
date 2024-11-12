@@ -10,9 +10,25 @@ import type { CafesService } from './cafes.class'
 // Main data model schema
 export const cafesSchema = Type.Object(
   {
-    id: Type.Number(),
-    text: Type.String(),
-    sn: Type.Number()
+    id: Type.String(), // UUID 是字串類型
+    name: Type.String(),
+    city: Type.String(),
+    wifi: Type.Number(), // float 對應到 Type.Number()
+    seat: Type.Number(),
+    quiet: Type.Number(),
+    tasty: Type.Number(),
+    cheap: Type.Number(),
+    music: Type.Number(),
+    url: Type.String(),
+    address: Type.String(),
+    latitude: Type.String(),
+    longitude: Type.String(),
+    limited_time: Type.String(),
+    socket: Type.String(),
+    standing_desk: Type.String(),
+    mrt: Type.String(),
+    open_time: Type.String(),
+    sn: Type.Number() // increments 對應到 Type.Number()
   },
   { $id: 'Cafes', additionalProperties: false }
 )
@@ -23,7 +39,25 @@ export const cafesResolver = resolve<Cafes, HookContext<CafesService>>({})
 export const cafesExternalResolver = resolve<Cafes, HookContext<CafesService>>({})
 
 // Schema for creating new entries
-export const cafesDataSchema = Type.Pick(cafesSchema, ['text'], {
+export const cafesDataSchema = Type.Pick(cafesSchema, [
+  'name',
+  'city',
+  'wifi',
+  'seat',
+  'quiet',
+  'tasty',
+  'cheap',
+  'music',
+  'url',
+  'address',
+  'latitude',
+  'longitude',
+  'limited_time',
+  'socket',
+  'standing_desk',
+  'mrt',
+  'open_time'
+], {
   $id: 'CafesData'
 })
 export type CafesData = Static<typeof cafesDataSchema>
@@ -39,7 +73,28 @@ export const cafesPatchValidator = getValidator(cafesPatchSchema, dataValidator)
 export const cafesPatchResolver = resolve<Cafes, HookContext<CafesService>>({})
 
 // Schema for allowed query properties
-export const cafesQueryProperties = Type.Pick(cafesSchema, ['id', 'text', 'sn'])
+export const cafesQueryProperties = Type.Pick(cafesSchema, [
+  'id',
+  'name',
+  'city',
+  'wifi',
+  'seat',
+  'quiet',
+  'tasty',
+  'cheap',
+  'music',
+  'url',
+  'address',
+  'latitude',
+  'longitude',
+  'limited_time',
+  'socket',
+  'standing_desk',
+  'mrt',
+  'open_time',
+  'sn'
+])
+
 export const cafesQuerySchema = Type.Intersect(
   [
     querySyntax(cafesQueryProperties),
