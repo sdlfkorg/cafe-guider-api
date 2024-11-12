@@ -1,6 +1,6 @@
 import { Knex } from "knex";
 import crypto from 'crypto';
-import { cafes } from "../public/cafes";
+import { cafes } from "../db-data/cafes";
 
 export async function seed(knex: Knex): Promise<void> {
     // Deletes ALL existing entries
