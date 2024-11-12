@@ -11,7 +11,8 @@ import type { CafesService } from './cafes.class'
 export const cafesSchema = Type.Object(
   {
     id: Type.Number(),
-    text: Type.String()
+    text: Type.String(),
+    sn: Type.Number()
   },
   { $id: 'Cafes', additionalProperties: false }
 )
@@ -38,7 +39,7 @@ export const cafesPatchValidator = getValidator(cafesPatchSchema, dataValidator)
 export const cafesPatchResolver = resolve<Cafes, HookContext<CafesService>>({})
 
 // Schema for allowed query properties
-export const cafesQueryProperties = Type.Pick(cafesSchema, ['id', 'text'])
+export const cafesQueryProperties = Type.Pick(cafesSchema, ['id', 'text', 'sn'])
 export const cafesQuerySchema = Type.Intersect(
   [
     querySyntax(cafesQueryProperties),
